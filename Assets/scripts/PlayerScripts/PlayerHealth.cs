@@ -44,4 +44,11 @@ public class PlayerHealth : MonoBehaviour
             hearts[i].enabled = i < maxHealth;
         }
     }
+
+    public void RestoreFullHealth()
+    {
+        currentHealth = maxHealth;
+        UpdateHealthBar();
+    }
+
 }
