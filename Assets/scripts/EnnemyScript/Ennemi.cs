@@ -6,9 +6,12 @@ public class Ennemi : MonoBehaviour
     public Transform pointA;
     public Transform pointB;
     private bool movingToB = true;
+    private bool isRooted = false;
 
     void Update()
     {
+        if (isRooted) return; // Stoppe le mouvement s’il est enraciné
+
         if (movingToB)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointB.position, speed * Time.deltaTime);
@@ -21,5 +24,12 @@ public class Ennemi : MonoBehaviour
             if (Vector3.Distance(transform.position, pointA.position) < 0.1f)
                 movingToB = true;
         }
+    }
+
+    public void GetRooted()
+    {
+        isRooted = true;
+        transform.position -= new Vector3(0, 0.3f, 0); // Visuellement enfoncé dans le sol
+        Debug.Log("L'ennemi est enraciné !");
     }
 }
