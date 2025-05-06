@@ -2373,6 +2373,22 @@ PrefabInstance:
       value: Checkpoint
       objectReference: {fileID: 0}
     - target: {fileID: 7487145899372168907, guid: eba1999429a06834ab1ec18d66dcb0ac, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0245559
+      objectReference: {fileID: 0}
+    - target: {fileID: 7487145899372168907, guid: eba1999429a06834ab1ec18d66dcb0ac, type: 3}
+      propertyPath: m_Size.y
+      value: 2.8765707
+      objectReference: {fileID: 0}
+    - target: {fileID: 7487145899372168907, guid: eba1999429a06834ab1ec18d66dcb0ac, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.008091807
+      objectReference: {fileID: 0}
+    - target: {fileID: 7487145899372168907, guid: eba1999429a06834ab1ec18d66dcb0ac, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.23361254
+      objectReference: {fileID: 0}
+    - target: {fileID: 7487145899372168907, guid: eba1999429a06834ab1ec18d66dcb0ac, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
       value: 0
       objectReference: {fileID: 0}
