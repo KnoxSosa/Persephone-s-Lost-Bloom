@@ -14,6 +14,12 @@ public class PlayerMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+    private int extraJumps;
+    private int extraJumpsValue = 1;
+
+    private bool canJump = true;
+    private float jumpCooldown = 0.3f;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -28,14 +34,22 @@ public class PlayerMovement : MonoBehaviour
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (IsGrounded())
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            extraJumps = extraJumpsValue;
         }
 
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+        if (Input.GetButtonDown("Jump") && canJump)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+            if (IsGrounded())
+            {
+                StartCoroutine(PerformJump());
+            }
+            else if (extraJumps > 0)
+            {
+                StartCoroutine(PerformJump());
+                extraJumps--;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
@@ -44,6 +58,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip();
+    }
+
+    private IEnumerator PerformJump()
+    {
+        canJump = false;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+        yield return new WaitForSeconds(jumpCooldown);
+        canJump = true;
     }
 
     private void FixedUpdate()
@@ -87,5 +109,4 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
-
 }
