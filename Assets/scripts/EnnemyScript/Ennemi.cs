@@ -7,10 +7,11 @@ public class Ennemi : MonoBehaviour
     public Transform pointB;
     private bool movingToB = true;
     private bool isRooted = false;
+    public int health = 3;
 
     void Update()
     {
-        if (isRooted) return; // Stoppe le mouvement s’il est enraciné
+        if (isRooted) return;
 
         if (movingToB)
         {
@@ -29,7 +30,22 @@ public class Ennemi : MonoBehaviour
     public void GetRooted()
     {
         isRooted = true;
-        transform.position -= new Vector3(0, 0.3f, 0); // Visuellement enfoncé dans le sol
-        Debug.Log("L'ennemi est enraciné !");
+        transform.position -= new Vector3(0, 0.3f, 0);
+        Debug.Log("L'ennemi est enracinÃ© !");
+    }
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+        Debug.Log("Ennemi touchÃ© ! Vie restante : " + health);
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }
