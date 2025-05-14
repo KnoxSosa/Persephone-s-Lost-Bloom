@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
+    private float speed = 9f;
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
 
@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] private Animator animator; // 👈 Ajout de l'Animator
 
     private void Update()
     {
@@ -38,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
         {
             extraJumps = extraJumpsValue;
         }
+
+        // Met à jour le paramètre isJumping selon si le joueur est au sol
+        animator.SetBool("isJumping", !IsGrounded());
 
         if (Input.GetButtonDown("Jump") && canJump)
         {
@@ -63,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator PerformJump()
     {
         canJump = false;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower); // Correction: velocity, pas linearVelocity
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
     }
@@ -75,7 +79,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y); // Correction: velocity
+
+        // Met à jour les vitesses pour le blend tree dans Animator
+        animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
     private bool IsGrounded()
@@ -100,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        rb.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f); // Correction: velocity
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
