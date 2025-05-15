@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7230412695e7646bde9d4da7c934c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallThreshold: -22
+  fallThreshold: -25
   damageAmount: 1
   groundLayerMask:
     serializedVersion: 2
