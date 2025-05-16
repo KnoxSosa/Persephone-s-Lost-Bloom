@@ -42,5 +42,35 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: 1Sky
+    uniqueID: 753819363
+    locked: 0
+  - name: 2Mountains
+    uniqueID: 1933266213
+    locked: 0
+  - name: 3Clouds
+    uniqueID: 3695948687
+    locked: 0
+  - name: 4Mountain
+    uniqueID: 3668931893
+    locked: 0
+  - name: 5TreesLL
+    uniqueID: 1332421779
+    locked: 0
+  - name: 6TreesL
+    uniqueID: 3584502167
+    locked: 0
+  - name: 7Trees
+    uniqueID: 1332066583
+    locked: 0
+  - name: Tiles
+    uniqueID: 2327819925
+    locked: 0
+  - name: check point
+    uniqueID: 2124979549
+    locked: 0
+  - name: Player
+    uniqueID: 1626618963
+    locked: 0
   m_RenderingLayers:
   - Default
