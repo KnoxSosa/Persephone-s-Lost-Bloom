@@ -36,7 +36,7 @@ public class PlayerDeathHandler : MonoBehaviour
         // Réactivation du suivi caméra
         Camera.main.GetComponent<CameraFollow>().followEnabled = true;
 
-        // Activation de l'invincibilité temporaire
-        GetComponent<PlayerHealth>().ActivateInvincibility();
+        // Activation de l'invincibilité temporaire sans clignotement rouge (clignotement blanc)
+        GetComponent<PlayerHealth>().ActivateInvincibility(false);
     }
 }

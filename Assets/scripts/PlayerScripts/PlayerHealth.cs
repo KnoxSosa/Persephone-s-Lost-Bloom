@@ -12,7 +12,6 @@ public class PlayerHealth : MonoBehaviour
     public Sprite emptyHeart;
 
     private bool isInvincible = false;
-    public float invincibilityDuration = 1.5f;
 
     private void Start()
     {
@@ -27,11 +26,13 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
         UpdateHealthBar();
 
-        StartCoroutine(FlashRed()); // Ajout de l'effet rouge
-
         if (currentHealth <= 0)
         {
             Die();
+        }
+        else
+        {
+            ActivateInvincibility(true); // clignotement rouge (court)
         }
     }
 
@@ -44,11 +45,7 @@ public class PlayerHealth : MonoBehaviour
     {
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < currentHealth)
-                hearts[i].sprite = fullHeart;
-            else
-                hearts[i].sprite = emptyHeart;
-
+            hearts[i].sprite = i < currentHealth ? fullHeart : emptyHeart;
             hearts[i].enabled = i < maxHealth;
         }
     }
@@ -59,38 +56,42 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void ActivateInvincibility()
+    // Activation de l'invincibilité, avec paramètre pour clignotement rouge ou blanc
+    public void ActivateInvincibility(bool withRedBlink)
     {
         if (isInvincible) return;
-        StartCoroutine(InvincibilityRoutine());
+
+        float duration = withRedBlink ? 0.3f : 0.5f;
+        StartCoroutine(InvincibilityRoutine(withRedBlink, duration));
     }
 
-    private IEnumerator InvincibilityRoutine()
+    private IEnumerator InvincibilityRoutine(bool withRedBlink, float duration)
     {
         isInvincible = true;
-        float timer = 0f;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
-        while (timer < invincibilityDuration)
+        float timer = 0f;
+        float blinkInterval = 0.25f; // clignotement lent
+
+        while (timer < duration)
         {
-            sr.enabled = false;
-            yield return new WaitForSeconds(0.1f);
+            sr.color = withRedBlink ? Color.red : Color.white;
+
             sr.enabled = true;
-            yield return new WaitForSeconds(0.1f);
-            timer += 0.2f;
+            yield return new WaitForSeconds(blinkInterval / 2);
+
+            sr.enabled = false;
+            yield return new WaitForSeconds(blinkInterval / 2);
+
+            sr.enabled = true;
+            sr.color = Color.white;
+
+            timer += blinkInterval;
         }
 
+        sr.color = Color.white;
+        sr.enabled = true;
         isInvincible = false;
-    }
-
-    private IEnumerator FlashRed()
-    {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        Color originalColor = sr.color;
-
-        sr.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        sr.color = originalColor;
     }
 
     public bool IsInvincible()

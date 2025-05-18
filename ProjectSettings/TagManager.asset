@@ -72,5 +72,8 @@ TagManager:
   - name: Player
     uniqueID: 1626618963
     locked: 0
+  - name: spikes
+    uniqueID: 3615777625
+    locked: 0
   m_RenderingLayers:
   - Default

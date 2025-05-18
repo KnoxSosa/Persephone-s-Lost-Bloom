@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
-    [SerializeField] private Animator animator; // 👈 Ajout de l'Animator
+    [SerializeField] private Animator animator;
 
     private void Update()
     {
@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        // Déplacement horizontal : clavier ou stick gauche
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (IsGrounded())
@@ -40,10 +41,10 @@ public class PlayerMovement : MonoBehaviour
             extraJumps = extraJumpsValue;
         }
 
-        // Met à jour le paramètre isJumping selon si le joueur est au sol
         animator.SetBool("isJumping", !IsGrounded());
 
-        if (Input.GetButtonDown("Jump") && canJump)
+        // Saut : clavier (Espace) ou manette (Croix = JoystickButton1)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canJump)
         {
             if (IsGrounded())
             {
@@ -56,7 +57,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        // Dash : clavier (LeftShift) ou manette (R1 = JoystickButton5)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton5)) && canDash)
         {
             StartCoroutine(Dash());
         }
@@ -67,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator PerformJump()
     {
         canJump = false;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower); // Correction: velocity, pas linearVelocity
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
     }
@@ -79,9 +81,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y); // Correction: velocity
+        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
 
-        // Met à jour les vitesses pour le blend tree dans Animator
         animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
         animator.SetFloat("yVelocity", rb.linearVelocity.y);
     }
@@ -108,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f); // Correction: velocity
+        rb.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
