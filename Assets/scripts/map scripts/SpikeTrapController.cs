@@ -3,41 +3,52 @@ using System.Collections;
 
 public class SpikeTrapController : MonoBehaviour
 {
-    public GameObject spikePrefab;   // prefab du pic à instancier
-    public int spikeCount = 5;       // nombre de pics à générer
+    public GameObject spikes;
     public float delayBeforeActivation = 0.5f;
+    public float activeDuration = 1f;       // Durée pendant laquelle les pics sont visibles (reste en haut)
+    public float cooldownDuration = 2f;
 
-    public Vector2 areaSize = new Vector2(3f, 1f); // taille de la zone où les pics apparaissent (largeur x hauteur)
-    public Vector2 areaCenterOffset = Vector2.zero; // décalage de la zone par rapport à SpikeTrapRoot
-
-    public Transform spikeTrapRoot; // référence explicite au SpikeTrapRoot
-
-    private bool triggered = false;
+    private bool isOnCooldown = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (triggered) return;
+        if (isOnCooldown) return;
+
         if (other.CompareTag("Player"))
         {
-            triggered = true;
-            StartCoroutine(SpawnSpikes());
+            StartCoroutine(HandleSpikeTrap());
         }
     }
 
-    private IEnumerator SpawnSpikes()
+    private IEnumerator HandleSpikeTrap()
     {
+        isOnCooldown = true;
+
+        // Attente avant activation
         yield return new WaitForSeconds(delayBeforeActivation);
 
-        for (int i = 0; i < spikeCount; i++)
+        // Active l'objet Spikes
+        if (spikes != null)
         {
-            Vector2 randomPos2D = (Vector2)spikeTrapRoot.position + areaCenterOffset + new Vector2(
-                Random.Range(-areaSize.x / 2f, areaSize.x / 2f),
-                Random.Range(-areaSize.y / 2f, areaSize.y / 2f)
-            );
+            spikes.SetActive(true);
 
-            Vector3 spawnPos = new Vector3(randomPos2D.x, randomPos2D.y, 0f); // z fixé à 0
-
-            Instantiate(spikePrefab, spawnPos, Quaternion.identity);
+            // Lance l'animation "Spike_Activate"
+            Animator animator = spikes.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.Play("Spike_Activate", -1, 0f);
+            }
         }
+
+        // Attente pendant que les pics restent en haut
+        yield return new WaitForSeconds(activeDuration);
+
+        // Désactive les pics
+        if (spikes != null)
+            spikes.SetActive(false);
+
+        // Cooldown avant qu’on puisse réactiver le piège
+        yield return new WaitForSeconds(cooldownDuration);
+        isOnCooldown = false;
     }
 }
