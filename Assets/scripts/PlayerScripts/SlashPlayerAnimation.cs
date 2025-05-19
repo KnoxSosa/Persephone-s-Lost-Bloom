@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class SlashPlayerAttack : MonoBehaviour
 {
@@ -7,8 +8,9 @@ public class SlashPlayerAttack : MonoBehaviour
     public LayerMask enemyLayers;
     public int attackDamage = 1;
     public float attackRate = 2f;
-    private float nextAttackTime = 0f;
+    public float hitStopDuration = 0.05f; // Durée du freeze
 
+    private float nextAttackTime = 0f;
     private Animator animator;
 
     private void Start()
@@ -20,7 +22,8 @@ public class SlashPlayerAttack : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            if (Input.GetKeyDown(KeyCode.X)) // Touche d'attaque
+            // Touche X (clavier) ou bouton Carré (manette PS4)
+            if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
@@ -36,11 +39,24 @@ public class SlashPlayerAttack : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         Debug.Log("Ennemis détectés : " + hitEnemies.Length);
 
+        if (hitEnemies.Length > 0)
+        {
+            StartCoroutine(HitStop()); // ← Petit freeze d’impact
+        }
+
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Ennemi touché : " + enemy.name);
             enemy.GetComponent<Ennemi>()?.TakeDamage(attackDamage);
         }
+    }
+
+    IEnumerator HitStop()
+    {
+        float originalTimeScale = Time.timeScale;
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(hitStopDuration);
+        Time.timeScale = originalTimeScale;
     }
 
     void OnDrawGizmosSelected()
