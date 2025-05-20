@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerDeathHandler : MonoBehaviour
 {
     public float respawnDelay = 1.5f;
-    public float deathAnimationDuration = 0f; // Durée de l'animation de mort
+    public float deathAnimationDuration = 0.8f; // Durée de l'animation de mort
 
     private Animator animator;
     private SpriteRenderer sr;
