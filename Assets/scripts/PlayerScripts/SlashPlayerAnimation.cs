@@ -35,19 +35,25 @@ public class SlashPlayerAttack : MonoBehaviour
     {
         Debug.Log("Attaque lancée !");
         animator?.SetTrigger("Attack");
+        // ❌ Ne fait plus les dégâts ici
+        // Les dégâts seront faits dans l'événement animation (DealDamage)
+    }
 
+    // ✅ Appelée depuis l’animation via un Animation Event
+    public void DealDamage()
+    {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         Debug.Log("Ennemis détectés : " + hitEnemies.Length);
-
-        if (hitEnemies.Length > 0)
-        {
-            StartCoroutine(HitStop()); // ← Petit freeze d’impact
-        }
 
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Ennemi touché : " + enemy.name);
             enemy.GetComponent<Ennemi>()?.TakeDamage(attackDamage);
+        }
+
+        if (hitEnemies.Length > 0)
+        {
+            StartCoroutine(HitStop()); // ← Petit freeze d’impact
         }
     }
 
