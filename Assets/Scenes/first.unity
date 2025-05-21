@@ -700,6 +700,18 @@ MonoBehaviour:
   tr: {fileID: 431707594}
   animator: {fileID: 431707595}
   isAttacking: 0
+  jumpSound: {fileID: 8300000, guid: 4356cabd9aa93c34382b12f8776b777c, type: 3}
+  dashSound: {fileID: 8300000, guid: 8e34803692c64bc46832605543a9331f, type: 3}
+  landSound: {fileID: 8300000, guid: 66f1c9741c554f04a875623c27ece891, type: 3}
+  walkClips:
+  - {fileID: 8300000, guid: f232344a14e265544a7da72717621394, type: 3}
+  - {fileID: 8300000, guid: 65cb1a530f71b044391c55834a412d73, type: 3}
+  - {fileID: 8300000, guid: 0cf64495d5232b94db9f1927b65d1670, type: 3}
+  - {fileID: 8300000, guid: 22801a5e0855d024eb26910d2001f217, type: 3}
+  - {fileID: 8300000, guid: 75727593f5462414ea3697f483285303, type: 3}
+  - {fileID: 8300000, guid: 4469e1874502f2e4bb4b915423b75e1e, type: 3}
+  - {fileID: 8300000, guid: 3c6cda47e19958d44acc7a34c8c4f820, type: 3}
+  - {fileID: 8300000, guid: b3b4b4c1caaaeb848905d52b169ed85f, type: 3}
 --- !u!61 &431707590
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3130,6 +3142,11 @@ MonoBehaviour:
   pointA: {fileID: 1272786459}
   pointB: {fileID: 349771935}
   health: 3
+  detectionRadius: 5
+  attackRange: 1
+  attackDamage: 1
+  attackCooldown: 1.5
+  pushForce: 5
 --- !u!1 &1496851852
 GameObject:
   m_ObjectHideFlags: 0

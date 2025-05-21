@@ -1,16 +1,42 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [Header("Transition")]
+    public SceneTransitionManager transitionManager;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip clickSound;
+
     public void PlayGame()
     {
-        SceneManager.LoadScene("first"); // remplace par le nom exact de ta scène (ex: "Level1")
+        StartCoroutine(PlaySoundAndStartTransition());
+    }
+
+    private System.Collections.IEnumerator PlaySoundAndStartTransition()
+    {
+        // Joue le son de clic
+        if (audioSource != null && clickSound != null)
+        {
+            audioSource.PlayOneShot(clickSound);
+            yield return new WaitForSeconds(0.2f); // court délai pour que le son démarre
+        }
+
+        // Lance la transition vers la scène
+        if (transitionManager != null)
+        {
+            transitionManager.StartTransition();
+        }
+        else
+        {
+            Debug.LogWarning("TransitionManager n'est pas assigné !");
+        }
     }
 
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quit Game"); // Fonctionne uniquement dans le build
+        Debug.Log("Quit Game");
     }
 }
