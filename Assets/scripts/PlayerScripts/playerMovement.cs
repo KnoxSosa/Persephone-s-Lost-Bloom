@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canJump = true;
     private float jumpCooldown = 0.3f;
+    private bool wasGroundedLastFrame = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -28,6 +29,23 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isAttacking = false;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip dashSound;
+    [SerializeField] private AudioClip landSound;
+    [SerializeField] private AudioClip[] walkClips;  // <-- Tableau des sons de pas
+
+    private AudioSource sfxSource;
+
+    private int walkClipIndex = 0;
+    private float stepInterval = 0.35f;
+    private float stepTimer = 0f;
+
+    private void Start()
+    {
+        sfxSource = gameObject.AddComponent<AudioSource>();
+    }
+
     private void Update()
     {
         if (isDashing)
@@ -36,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         if (isAttacking && IsGrounded())
         {
             horizontal = 0f;
-            Flip(); // Facultatif : garder la direction actuelle
+            Flip();
             return;
         }
 
@@ -44,8 +62,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (IsGrounded())
         {
+            if (!wasGroundedLastFrame)
+            {
+                PlaySound(landSound);
+            }
             extraJumps = extraJumpsValue;
         }
+
+        wasGroundedLastFrame = IsGrounded();
 
         animator.SetBool("isJumping", !IsGrounded());
 
@@ -67,12 +91,43 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
 
+        HandleWalkSteps();
         Flip();
+    }
+
+    private void HandleWalkSteps()
+    {
+        if (IsGrounded() && Mathf.Abs(horizontal) > 0.1f)
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0f)
+            {
+                PlayStepSound();
+                stepTimer = stepInterval;
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+            walkClipIndex = 0; // reset à chaque arrêt pour recommencer au début
+        }
+    }
+
+    private void PlayStepSound()
+    {
+        if (walkClips.Length == 0) return;
+
+        sfxSource.PlayOneShot(walkClips[walkClipIndex]);
+
+        walkClipIndex++;
+        if (walkClipIndex >= walkClips.Length)
+            walkClipIndex = 0;
     }
 
     private IEnumerator PerformJump()
     {
         canJump = false;
+        PlaySound(jumpSound);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
@@ -112,15 +167,31 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        animator.SetBool("isDashing", true);
+
+        PlaySound(dashSound);
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         tr.emitting = true;
+
         yield return new WaitForSeconds(dashingTime);
+
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
+        animator.SetBool("isDashing", false);
+
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
     }
 }

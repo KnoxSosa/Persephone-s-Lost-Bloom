@@ -5,10 +5,18 @@ public class Checkpoint : MonoBehaviour
     private Animator animator;
     private bool isActivated = false;
 
+    public AudioSource activationSource;  // Son d'activation
+    public AudioSource loopSource;        // Son de feu permanent
+
     private void Start()
     {
         animator = GetComponent<Animator>();
-        animator.SetBool("IsActive", false);  // Assurez-vous que IsActive est false dès le début
+        animator.SetBool("IsActive", false);
+
+        if (loopSource != null)
+        {
+            loopSource.Stop();  // On s'assure qu'il ne joue pas au début
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -18,17 +26,40 @@ public class Checkpoint : MonoBehaviour
             Debug.Log("Checkpoint touché !");
             isActivated = true;
 
-            // Lance l'animation d'activation
+            // Jouer le son d’activation
+            if (activationSource != null)
+            {
+                activationSource.Play();
+            }
+
+            // Lancer le son de feu en boucle
+            if (loopSource != null && !loopSource.isPlaying)
+            {
+                loopSource.Play();
+            }
+
+            // Lancer l'animation
             animator.SetTrigger("Activate");
-            animator.SetBool("IsActive", true);  // Active le feu allumé
+            animator.SetBool("IsActive", true);
 
             RespawnManager.instance.SetCheckpoint(transform.position);
         }
     }
 
-    // Cette méthode est appelée à la fin de l'animation "Activate"
+    // Optionnel : méthode si tu veux désactiver le feu plus tard
+    public void Deactivate()
+    {
+        isActivated = false;
+        animator.SetBool("IsActive", false);
+        if (loopSource != null && loopSource.isPlaying)
+        {
+            loopSource.Stop();
+        }
+    }
+
+    // Si tu veux garder ça
     public void DeactivateActiveState()
     {
-        animator.SetBool("IsActive", false);  // Réinitialise le Bool à false pour arrêter la boucle
+        animator.SetBool("IsActive", false);
     }
 }

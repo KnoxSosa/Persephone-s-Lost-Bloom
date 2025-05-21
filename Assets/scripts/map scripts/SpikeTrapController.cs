@@ -5,8 +5,12 @@ public class SpikeTrapController : MonoBehaviour
 {
     public GameObject spikes;
     public float delayBeforeActivation = 0.5f;
-    public float activeDuration = 1f;       // Durée pendant laquelle les pics sont visibles (reste en haut)
+    public float activeDuration = 1f;
     public float cooldownDuration = 2f;
+
+    public AudioSource audioSource;
+    public AudioClip activationSound;
+    public AudioClip retractionSound;
 
     private bool isOnCooldown = false;
 
@@ -24,30 +28,41 @@ public class SpikeTrapController : MonoBehaviour
     {
         isOnCooldown = true;
 
-        // Attente avant activation
         yield return new WaitForSeconds(delayBeforeActivation);
 
-        // Active l'objet Spikes
+        // Active les pics
         if (spikes != null)
         {
             spikes.SetActive(true);
 
-            // Lance l'animation "Spike_Activate"
+            // Animation
             Animator animator = spikes.GetComponent<Animator>();
             if (animator != null)
             {
                 animator.Play("Spike_Activate", -1, 0f);
             }
+
+            // Son d’activation
+            if (audioSource != null && activationSound != null)
+            {
+                audioSource.PlayOneShot(activationSound);
+            }
         }
 
-        // Attente pendant que les pics restent en haut
         yield return new WaitForSeconds(activeDuration);
 
-        // Désactive les pics
-        if (spikes != null)
-            spikes.SetActive(false);
+        // Son de rétraction
+        if (audioSource != null && retractionSound != null)
+        {
+            audioSource.PlayOneShot(retractionSound);
+        }
 
-        // Cooldown avant qu’on puisse réactiver le piège
+        // Désactivation visuelle
+        if (spikes != null)
+        {
+            spikes.SetActive(false);
+        }
+
         yield return new WaitForSeconds(cooldownDuration);
         isOnCooldown = false;
     }

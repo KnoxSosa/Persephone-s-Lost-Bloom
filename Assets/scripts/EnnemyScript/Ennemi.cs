@@ -6,34 +6,134 @@ public class Ennemi : MonoBehaviour
     public float speed = 2f;
     public Transform pointA;
     public Transform pointB;
+
     private bool movingToB = true;
     private bool isRooted = false;
+    private bool isAttacking = false;
+
     public int health = 3;
+
+    public float detectionRadius = 5f;
+    public float attackRange = 1f;
+    public int attackDamage = 1;
+    public float attackCooldown = 1.5f;
+    public float pushForce = 5f;
+
+    private float lastAttackTime = 0f;
 
     private SpriteRenderer sr;
     private Color originalColor;
 
+    private Transform player;
+    private float fixedY;
+
+    private Animator anim;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        originalColor = sr.color; // On garde la couleur d'origine
+        anim = GetComponent<Animator>();
+        originalColor = sr.color;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        fixedY = transform.position.y;
     }
 
     void Update()
     {
-        if (isRooted) return;
-
-        if (movingToB)
+        if (isRooted || isAttacking)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pointB.position, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, pointB.position) < 0.1f)
-                movingToB = false;
+            SetWalking(false);
+            return;
+        }
+
+        if (player != null)
+        {
+            float distanceToPlayer = Mathf.Abs(transform.position.x - player.position.x);
+
+            if (distanceToPlayer <= detectionRadius)
+            {
+                if (distanceToPlayer > attackRange)
+                {
+                    Vector3 targetPosition = new Vector3(player.position.x, fixedY, transform.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                    SetWalking(true);
+                }
+                else
+                {
+                    SetWalking(false);
+                    if (Time.time - lastAttackTime > attackCooldown)
+                    {
+                        StartCoroutine(PrepareAndAttack());
+                        lastAttackTime = Time.time;
+                    }
+                }
+            }
+            else
+            {
+                Patrol();
+            }
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, pointA.position, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, pointA.position) < 0.1f)
-                movingToB = true;
+            Patrol();
+        }
+    }
+
+    void SetWalking(bool walking)
+    {
+        if (anim != null)
+            anim.SetBool("IsWalking", walking);
+    }
+
+    void Patrol()
+    {
+        Vector3 target = movingToB ? pointB.position : pointA.position;
+        target.y = fixedY;
+
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        SetWalking(true);
+
+        if (Vector3.Distance(transform.position, target) < 0.1f)
+            movingToB = !movingToB;
+    }
+
+    private IEnumerator PrepareAndAttack()
+    {
+        isAttacking = true;
+        SetWalking(false);
+
+        if (anim != null)
+            anim.SetTrigger("PrepareAttack");
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (anim != null)
+            anim.SetTrigger("Attack");
+
+        AttackPlayer();
+        yield return new WaitForSeconds(0.3f); // laisse le temps à l'anim de se finir
+        isAttacking = false;
+    }
+
+    void AttackPlayer()
+    {
+        if (player == null) return;
+
+        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            float distance = Mathf.Abs(transform.position.x - player.position.x);
+            if (distance <= attackRange + 0.5f)
+            {
+                playerHealth.TakeDamage(attackDamage);
+
+                Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+                if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
+                {
+                    Vector2 pushDir = (player.position - transform.position).normalized;
+                    rb.AddForce(pushDir * pushForce, ForceMode2D.Impulse);
+                }
+            }
         }
     }
 
@@ -42,6 +142,7 @@ public class Ennemi : MonoBehaviour
         isRooted = true;
         transform.position -= new Vector3(0, 0.3f, 0);
         Debug.Log("L'ennemi est enraciné !");
+        SetWalking(false);
     }
 
     public void TakeDamage(int amount)
@@ -63,12 +164,16 @@ public class Ennemi : MonoBehaviour
         {
             sr.color = Color.white;
             yield return new WaitForSeconds(0.1f);
-            sr.color = originalColor; // Revenir à la couleur normale
+            sr.color = originalColor;
         }
     }
 
     void Die()
     {
-        Destroy(gameObject);
+        if (anim != null)
+            anim.SetTrigger("Death");
+
+        SetWalking(false);
+        Destroy(gameObject, 1f); // Laisse l'anim de mort se jouer
     }
 }
