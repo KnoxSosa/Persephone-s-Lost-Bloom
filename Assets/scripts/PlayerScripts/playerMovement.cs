@@ -26,14 +26,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private Animator animator;
 
+    public bool isAttacking = false;
+
     private void Update()
     {
         if (isDashing)
+            return;
+
+        if (isAttacking && IsGrounded())
         {
+            horizontal = 0f;
+            Flip(); // Facultatif : garder la direction actuelle
             return;
         }
 
-        // Déplacement horizontal : clavier ou stick gauche
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (IsGrounded())
@@ -43,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("isJumping", !IsGrounded());
 
-        // Saut : clavier (Espace) ou manette (Croix = JoystickButton1)
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && canJump)
         {
             if (IsGrounded())
@@ -57,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Dash : clavier (LeftShift) ou manette (R1 = JoystickButton5)
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton5)) && canDash)
         {
             StartCoroutine(Dash());
@@ -77,17 +81,18 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (isDashing)
-        {
             return;
-        }
 
-        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+        if (!(isAttacking && IsGrounded()))
+        {
+            rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+        }
 
         animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
         animator.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }

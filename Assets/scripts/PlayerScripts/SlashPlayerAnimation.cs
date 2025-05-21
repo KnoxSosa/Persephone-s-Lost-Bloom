@@ -8,21 +8,22 @@ public class SlashPlayerAttack : MonoBehaviour
     public LayerMask enemyLayers;
     public int attackDamage = 1;
     public float attackRate = 2f;
-    public float hitStopDuration = 0.05f; // Durée du freeze
+    public float hitStopDuration = 0.05f;
 
     private float nextAttackTime = 0f;
     private Animator animator;
+    private PlayerMovement movement;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        movement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
         if (Time.time >= nextAttackTime)
         {
-            // Touche X (clavier) ou bouton Carré (manette PS4)
             if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 Attack();
@@ -35,12 +36,13 @@ public class SlashPlayerAttack : MonoBehaviour
     {
         Debug.Log("Attaque lancée !");
         animator?.SetTrigger("Attack");
-        // ❌ Ne fait plus les dégâts ici
-        // Les dégâts seront faits dans l'événement animation (DealDamage)
+        if (movement.IsGrounded()) // ✅ On bloque le mouvement seulement au sol
+        {
+            movement.isAttacking = true;
+        }
     }
 
-    // ✅ Appelée depuis l’animation via un Animation Event
-    public void DealDamage()
+    public void DealDamage() // Appelée par l'événement dans l'animation
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         Debug.Log("Ennemis détectés : " + hitEnemies.Length);
@@ -53,8 +55,13 @@ public class SlashPlayerAttack : MonoBehaviour
 
         if (hitEnemies.Length > 0)
         {
-            StartCoroutine(HitStop()); // ← Petit freeze d’impact
+            StartCoroutine(HitStop());
         }
+    }
+
+    public void EndAttack() // Appelée à la fin de l'animation
+    {
+        movement.isAttacking = false;
     }
 
     IEnumerator HitStop()

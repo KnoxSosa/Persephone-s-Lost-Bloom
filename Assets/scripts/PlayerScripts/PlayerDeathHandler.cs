@@ -4,17 +4,21 @@ using System.Collections;
 public class PlayerDeathHandler : MonoBehaviour
 {
     public float respawnDelay = 1.5f;
-    public float deathAnimationDuration = 0.8f; // Durée de l'animation de mort
+    public float deathAnimationDuration = 0.8f;
 
     private Animator animator;
     private SpriteRenderer sr;
     private Collider2D col;
+    private Rigidbody2D rb;
+    private PlayerMovement movement; // remplace par ton script de mouvement
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
+        movement = GetComponent<PlayerMovement>(); // adapte le nom ici
     }
 
     public void Die()
@@ -26,39 +30,43 @@ public class PlayerDeathHandler : MonoBehaviour
     {
         Debug.Log("Début de DieRoutine");
 
-        // 🔥 Déclencher l'animation de mort
+        // 🔥 Lancer l'animation de mort
         if (animator != null)
         {
             animator.SetTrigger("Die");
         }
 
-        // ⏳ Attendre que l'animation se termine
+        // 🧊 Geler la position (arrêt net du mouvement)
+        if (movement != null) movement.enabled = false;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero; // stop mouvement
+            rb.bodyType = RigidbodyType2D.Static; // figé totalement
+        }
+
+        // ⏳ Attente animation
         yield return new WaitForSeconds(deathAnimationDuration);
 
-        // Désactivation du suivi de la caméra
-        Camera.main.GetComponent<CameraFollow>().followEnabled = false;
-
-        // Désactivation temporaire du visuel et des collisions
+        // ❌ Désactivation temporaire
         if (sr != null) sr.enabled = false;
         if (col != null) col.enabled = false;
+        Camera.main.GetComponent<CameraFollow>().followEnabled = false;
 
         // ⏳ Attente avant respawn
         yield return new WaitForSeconds(respawnDelay);
 
-        // Restauration de la santé
+        // 🩺 Soins et réapparition
         GetComponent<PlayerHealth>().RestoreFullHealth();
-
-        // Respawn à la position du checkpoint
         RespawnManager.instance.Respawn(gameObject);
 
-        // Réactivation du visuel et des collisions
+        // ✅ Réactiver éléments
         if (sr != null) sr.enabled = true;
         if (col != null) col.enabled = true;
-
-        // Réactivation du suivi caméra
+        if (rb != null) rb.bodyType = RigidbodyType2D.Dynamic; // restaurer physique
+        if (movement != null) movement.enabled = true;
         Camera.main.GetComponent<CameraFollow>().followEnabled = true;
 
-        // Activation de l'invincibilité temporaire sans clignotement rouge
+        // 🛡️ Invincibilité après respawn
         GetComponent<PlayerHealth>().ActivateInvincibility(false);
     }
 }

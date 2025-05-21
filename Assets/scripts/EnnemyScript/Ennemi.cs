@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Ennemi : MonoBehaviour
 {
@@ -8,6 +9,15 @@ public class Ennemi : MonoBehaviour
     private bool movingToB = true;
     private bool isRooted = false;
     public int health = 3;
+
+    private SpriteRenderer sr;
+    private Color originalColor;
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color; // On garde la couleur d'origine
+    }
 
     void Update()
     {
@@ -38,9 +48,22 @@ public class Ennemi : MonoBehaviour
     {
         health -= amount;
         Debug.Log("Ennemi touché ! Vie restante : " + health);
+
+        StartCoroutine(FlashWhite());
+
         if (health <= 0)
         {
             Die();
+        }
+    }
+
+    private IEnumerator FlashWhite()
+    {
+        if (sr != null)
+        {
+            sr.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            sr.color = originalColor; // Revenir à la couleur normale
         }
     }
 
