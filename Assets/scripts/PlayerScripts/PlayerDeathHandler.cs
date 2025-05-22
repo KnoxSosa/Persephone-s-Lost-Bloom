@@ -10,7 +10,7 @@ public class PlayerDeathHandler : MonoBehaviour
     private SpriteRenderer sr;
     private Collider2D col;
     private Rigidbody2D rb;
-    private PlayerMovement movement; // remplace par ton script de mouvement
+    private PlayerMovement movement; // adapte le nom ici si nécessaire
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class PlayerDeathHandler : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
-        movement = GetComponent<PlayerMovement>(); // adapte le nom ici
+        movement = GetComponent<PlayerMovement>();
     }
 
     public void Die()
@@ -30,53 +30,47 @@ public class PlayerDeathHandler : MonoBehaviour
     {
         Debug.Log("Début de DieRoutine");
 
-        // 🔥 Lancer l'animation de mort
+        // 🔥 Animation de mort
         if (animator != null)
-        {
             animator.SetTrigger("Die");
-        }
 
-        // 🧊 Geler la position (arrêt net du mouvement)
+        // 🧊 Geler le joueur
         if (movement != null) movement.enabled = false;
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero; // stop mouvement
-            rb.bodyType = RigidbodyType2D.Static; // figé totalement
+            rb.linearVelocity = Vector2.zero;
+            rb.bodyType = RigidbodyType2D.Static;
         }
 
         // ⏳ Attente animation
         yield return new WaitForSeconds(deathAnimationDuration);
 
-        // ❌ Désactivation temporaire
+        // ❌ Masquer le joueur
         if (sr != null) sr.enabled = false;
         if (col != null) col.enabled = false;
 
-        // 🔒 Verrouiller la caméra pendant la mort/respawn
-        if (CameraController.Instance != null)
-        {
-            CameraController.Instance.cameraLocked = true;
-        }
+        // 🔒 Verrouiller la caméra
+        if (AdvancedCameraController.Instance != null)
+            AdvancedCameraController.Instance.cameraLocked = true;
 
         // ⏳ Attente avant respawn
         yield return new WaitForSeconds(respawnDelay);
 
-        // 🩺 Soins et réapparition
+        // 🩺 Soigner et respawn
         GetComponent<PlayerHealth>().RestoreFullHealth();
         RespawnManager.instance.Respawn(gameObject);
 
-        // ✅ Réactiver éléments
+        // ✅ Réactiver le joueur
         if (sr != null) sr.enabled = true;
         if (col != null) col.enabled = true;
-        if (rb != null) rb.bodyType = RigidbodyType2D.Dynamic; // restaurer physique
+        if (rb != null) rb.bodyType = RigidbodyType2D.Dynamic;
         if (movement != null) movement.enabled = true;
 
         // 🔓 Déverrouiller la caméra
-        if (CameraController.Instance != null)
-        {
-            CameraController.Instance.cameraLocked = false;
-        }
+        if (AdvancedCameraController.Instance != null)
+            AdvancedCameraController.Instance.cameraLocked = false;
 
-        // 🛡️ Invincibilité après respawn
+        // 🛡️ Activer invincibilité temporaire
         GetComponent<PlayerHealth>().ActivateInvincibility(false);
     }
 }

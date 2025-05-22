@@ -4,19 +4,28 @@ public class RootAttack : MonoBehaviour
 {
     public float speed = 5f;
     public float lifeTime = 2f;
+    public Vector2 direction = Vector2.right; // direction configurable
 
     private bool hasHit = false;
 
     private void Start()
     {
-        Destroy(gameObject, lifeTime); // auto-destruction si rien n’est touché
+        Destroy(gameObject, lifeTime);
+
+        // 🔁 Retourne le projectile visuellement si la direction est vers la gauche
+        if (direction.x < 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
     }
 
     private void Update()
     {
         if (!hasHit)
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            transform.Translate(direction.normalized * speed * Time.deltaTime);
         }
     }
 
@@ -32,7 +41,6 @@ public class RootAttack : MonoBehaviour
             hasHit = true;
             enabled = false;
 
-            // ✅ Récupère le script dans l'enfant
             RootProjectile rootAnim = GetComponentInChildren<RootProjectile>();
             if (rootAnim != null)
             {

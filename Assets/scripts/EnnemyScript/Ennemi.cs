@@ -10,6 +10,7 @@ public class Ennemi : MonoBehaviour
     private bool movingToB = true;
     private bool isRooted = false;
     private bool isAttacking = false;
+    private bool isDead = false;
 
     public int health = 3;
 
@@ -40,7 +41,7 @@ public class Ennemi : MonoBehaviour
 
     void Update()
     {
-        if (isRooted || isAttacking)
+        if (isDead || isRooted || isAttacking)
         {
             SetWalking(false);
             return;
@@ -55,7 +56,10 @@ public class Ennemi : MonoBehaviour
                 if (distanceToPlayer > attackRange)
                 {
                     Vector3 targetPosition = new Vector3(player.position.x, fixedY, transform.position.z);
+                    float direction = targetPosition.x - transform.position.x;
+
                     transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                    FlipSprite(direction);
                     SetWalking(true);
                 }
                 else
@@ -85,12 +89,20 @@ public class Ennemi : MonoBehaviour
             anim.SetBool("IsWalking", walking);
     }
 
+    void FlipSprite(float direction)
+    {
+        if (sr != null)
+            sr.flipX = direction > 0;
+    }
+
     void Patrol()
     {
         Vector3 target = movingToB ? pointB.position : pointA.position;
         target.y = fixedY;
 
+        float direction = target.x - transform.position.x;
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        FlipSprite(direction);
         SetWalking(true);
 
         if (Vector3.Distance(transform.position, target) < 0.1f)
@@ -111,7 +123,7 @@ public class Ennemi : MonoBehaviour
             anim.SetTrigger("Attack");
 
         AttackPlayer();
-        yield return new WaitForSeconds(0.3f); // laisse le temps à l'anim de se finir
+        yield return new WaitForSeconds(0.3f); // Laisse le temps à l'anim de se finir
         isAttacking = false;
     }
 
@@ -147,6 +159,8 @@ public class Ennemi : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (isDead) return;
+
         health -= amount;
         Debug.Log("Ennemi touché ! Vie restante : " + health);
 
@@ -162,7 +176,7 @@ public class Ennemi : MonoBehaviour
     {
         if (sr != null)
         {
-            sr.color = Color.white;
+            sr.color = Color.cyan; // Change en bleu clair quand touché
             yield return new WaitForSeconds(0.1f);
             sr.color = originalColor;
         }
@@ -170,10 +184,20 @@ public class Ennemi : MonoBehaviour
 
     void Die()
     {
-        if (anim != null)
-            anim.SetTrigger("Death");
+        if (isDead) return;
+        isDead = true;
 
         SetWalking(false);
+
+        if (anim != null)
+            anim.SetTrigger("Death");
+        else
+            Debug.LogWarning("Aucune animation de mort assignée !");
+
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+            col.enabled = false;
+
         Destroy(gameObject, 1f); // Laisse l'anim de mort se jouer
     }
 }
