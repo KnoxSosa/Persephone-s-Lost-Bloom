@@ -1,0 +1,1227 @@
+fileFormatVersion: 2
+guid: 3801c2b15389e234fa90a607f01fcbb6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4842438826033671197
+    second: tile map revert_0
+  - first:
+      213: -1071792273052032706
+    second: tile map revert_1
+  - first:
+      213: 3834986906075431072
+    second: tile map revert_2
+  - first:
+      213: -3188945724494255170
+    second: tile map revert_3
+  - first:
+      213: 7563640966606758374
+    second: tile map revert_4
+  - first:
+      213: 142680832518517958
+    second: tile map revert_5
+  - first:
+      213: 961621647422373614
+    second: tile map revert_6
+  - first:
+      213: 766676510097845169
+    second: tile map revert_7
+  - first:
+      213: 8511151033560533692
+    second: tile map revert_8
+  - first:
+      213: -1860022238988929609
+    second: tile map revert_9
+  - first:
+      213: -938263779780730408
+    second: tile map revert_10
+  - first:
+      213: -7068718480460971830
+    second: tile map revert_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 24
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tile map revert_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a1281a540deb3142b721014141cfd5c
+      internalID: -2059385844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29b57653dbbbe0145b70612500c55dcc
+      internalID: 127265862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1066136f247529146a5ab42dd784b2c4
+      internalID: 1173193628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 781739d65d5c16b478da2af6645c27e3
+      internalID: 1795925307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3d96580c7aeb094e937293986482a8b
+      internalID: -1815646373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1527d6063316e5c44951c7f771fb62ab
+      internalID: 707707725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_6
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfb788010c90d7846bb0673f8ecf9058
+      internalID: 1857443945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_7
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f4ab64a37819a747814dbd4c203abcb
+      internalID: 1801281169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_8
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e4dfad38668089408555315256a67df
+      internalID: -2039599516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_9
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 452
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cb6c2a767b560541be836a3c03072d8
+      internalID: -1624220025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 404
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c224a3572a15d1a45bb49337f7b2b2d6
+      internalID: 754878440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 404
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c74ce25c344f854186da841528a02fd
+      internalID: 714833450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 404
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6319d050a0e9f704ea8e564f26ab12a9
+      internalID: -763679392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_13
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 404
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cce82a40b3d5df4d86c3cb67bbe5aee
+      internalID: -343208914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_14
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 404
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 24, y: 18}
+        - {x: 17, y: 21}
+        - {x: -17, y: 21}
+        - {x: -20, y: 20}
+        - {x: -24, y: 17}
+        - {x: -24, y: -24}
+        - {x: 24, y: -24}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 386977cf830ec234895cfee945ad8c35
+      internalID: -1584108069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_15
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 404
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf31e10d26077214cb762a3550f2698f
+      internalID: -2132561340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_16
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 404
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba9336c856f38534a803813ea6061cad
+      internalID: -1927724350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_17
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 404
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ef7779c53472d647a3178aace53f47b
+      internalID: -1290337033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 356
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24c1da7884401c94687abd60d1124344
+      internalID: 1446595681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_19
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 356
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c1218038f463e04783c6120d4b0836a
+      internalID: -1619779628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_20
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 356
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe207d86dad551f4da0ea8281827b416
+      internalID: -749035170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_21
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 356
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db3f5b4353ef3404ca412690e83fe669
+      internalID: -1148497186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_22
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 356
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80488e8c5de3b6b45a3418c634cc6591
+      internalID: -113965105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_23
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 356
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bd14426862f9584d974ee23f71463ff
+      internalID: -1362518565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_24
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 356
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9e21b01a9ae35d43ad37f7688e78b43
+      internalID: 1637887708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 308
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d79c612ae574b34ea72b64cd0d3d280
+      internalID: -1511131504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_26
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 308
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd7e760de45ca7b40836f0bc8f4c13d3
+      internalID: -2056440969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 308
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5abdbc1713346e49b5e58e8e953c4b1
+      internalID: 1080699453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_28
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 308
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e190bf62f0ab91b41b5a4b0e114042c8
+      internalID: 1138147301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_29
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 308
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fad12ae72c1a2de488e0823f64d6fe90
+      internalID: -2123213785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_30
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 308
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aae2203680d953a458da3449a683bc73
+      internalID: -2050382319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_31
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 308
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eed2868b5068c3e4a9585d418b0a05e4
+      internalID: -751301839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_32
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 308
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2631c7f255d22c84cb0d2db1a2fdca9d
+      internalID: 678885625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_33
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 260
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ce11fc6f232bf448bfd33efbc9a4fca
+      internalID: 2038760849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_34
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 260
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d159d310257e84b47b369a87efe4ec5b
+      internalID: -1112847034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_35
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 212
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5070259b51e8fd6428a018098fd2f757
+      internalID: -1046294666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_36
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 164
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 24, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: -2}
+        - {x: 4, y: -2}
+        - {x: 4, y: -24}
+        - {x: 24, y: -24}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5798fdc6da390843aa0c9b70d7a1420
+      internalID: 2111168938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_37
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 164
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04f19e699939d2343959e1913966ab5b
+      internalID: -317599603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_38
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 164
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 24, y: -1}
+        - {x: 24, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: 4, y: -24}
+        - {x: 4, y: -1}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bc30f21822dfad4a87a33abccaa0f24
+      internalID: 107625513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_39
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 116
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 24, y: 24}
+        - {x: 4, y: 24}
+        - {x: 4, y: -24}
+        - {x: 24, y: -24}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 952051140bc94704ea872bb17e7490ba
+      internalID: -1868734476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_40
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 116
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33887d89b91f3d34196a5f2e54e31f4a
+      internalID: -865363476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_41
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 116
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 4, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: -24}
+        - {x: 4, y: -24}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8788d5a64c6206f4094f794763db75b2
+      internalID: -1290419782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_42
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 68
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 24, y: 24}
+        - {x: 4, y: 24}
+        - {x: 4, y: -5}
+        - {x: 24, y: -5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4ed22651f2104743a083e6f58460429
+      internalID: -1937441958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_43
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 68
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 24, y: -5}
+        - {x: 24, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: -5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81edfb15527ab9347ba7deaf152073b8
+      internalID: -2141994841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile map revert_44
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 68
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 5, y: -5}
+        - {x: 5, y: 24}
+        - {x: -24, y: 24}
+        - {x: -24, y: -5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe6afca29cd07144da28251798ba21f0
+      internalID: 1718226826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 058bda61cf94543429dc3795f1d13254
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      tile map revert_0: -2059385844
+      tile map revert_1: 127265862
+      tile map revert_10: 754878440
+      tile map revert_11: 714833450
+      tile map revert_12: -763679392
+      tile map revert_13: -343208914
+      tile map revert_14: -1584108069
+      tile map revert_15: -2132561340
+      tile map revert_16: -1927724350
+      tile map revert_17: -1290337033
+      tile map revert_18: 1446595681
+      tile map revert_19: -1619779628
+      tile map revert_2: 1173193628
+      tile map revert_20: -749035170
+      tile map revert_21: -1148497186
+      tile map revert_22: -113965105
+      tile map revert_23: -1362518565
+      tile map revert_24: 1637887708
+      tile map revert_25: -1511131504
+      tile map revert_26: -2056440969
+      tile map revert_27: 1080699453
+      tile map revert_28: 1138147301
+      tile map revert_29: -2123213785
+      tile map revert_3: 1795925307
+      tile map revert_30: -2050382319
+      tile map revert_31: -751301839
+      tile map revert_32: 678885625
+      tile map revert_33: 2038760849
+      tile map revert_34: -1112847034
+      tile map revert_35: -1046294666
+      tile map revert_36: 2111168938
+      tile map revert_37: -317599603
+      tile map revert_38: 107625513
+      tile map revert_39: -1868734476
+      tile map revert_4: -1815646373
+      tile map revert_40: -865363476
+      tile map revert_41: -1290419782
+      tile map revert_42: -1937441958
+      tile map revert_43: -2141994841
+      tile map revert_44: 1718226826
+      tile map revert_5: 707707725
+      tile map revert_6: 1857443945
+      tile map revert_7: 1801281169
+      tile map revert_8: -2039599516
+      tile map revert_9: -1624220025
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
