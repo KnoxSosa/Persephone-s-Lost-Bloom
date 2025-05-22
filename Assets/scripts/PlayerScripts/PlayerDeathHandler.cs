@@ -50,7 +50,12 @@ public class PlayerDeathHandler : MonoBehaviour
         // ❌ Désactivation temporaire
         if (sr != null) sr.enabled = false;
         if (col != null) col.enabled = false;
-        Camera.main.GetComponent<CameraFollow>().followEnabled = false;
+
+        // 🔒 Verrouiller la caméra pendant la mort/respawn
+        if (CameraController.Instance != null)
+        {
+            CameraController.Instance.cameraLocked = true;
+        }
 
         // ⏳ Attente avant respawn
         yield return new WaitForSeconds(respawnDelay);
@@ -64,7 +69,12 @@ public class PlayerDeathHandler : MonoBehaviour
         if (col != null) col.enabled = true;
         if (rb != null) rb.bodyType = RigidbodyType2D.Dynamic; // restaurer physique
         if (movement != null) movement.enabled = true;
-        Camera.main.GetComponent<CameraFollow>().followEnabled = true;
+
+        // 🔓 Déverrouiller la caméra
+        if (CameraController.Instance != null)
+        {
+            CameraController.Instance.cameraLocked = false;
+        }
 
         // 🛡️ Invincibilité après respawn
         GetComponent<PlayerHealth>().ActivateInvincibility(false);
