@@ -30,6 +30,9 @@ public class Ennemi : MonoBehaviour
 
     private Animator anim;
 
+    public GameObject iceEffectPrefab;  // <-- Assign this in the Inspector
+    private GameObject iceEffectInstance;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -123,7 +126,7 @@ public class Ennemi : MonoBehaviour
             anim.SetTrigger("Attack");
 
         AttackPlayer();
-        yield return new WaitForSeconds(0.3f); // Laisse le temps à l'anim de se finir
+        yield return new WaitForSeconds(0.3f);
         isAttacking = false;
     }
 
@@ -151,10 +154,39 @@ public class Ennemi : MonoBehaviour
 
     public void GetRooted()
     {
+        if (isRooted) return;
+
         isRooted = true;
-        transform.position -= new Vector3(0, 0.3f, 0);
-        Debug.Log("L'ennemi est enraciné !");
+        Debug.Log("❄️ Ennemi enraciné !");
         SetWalking(false);
+
+        // Freeze animation sur la frame actuelle
+        if (anim != null)
+            anim.speed = 0f;
+
+        // Instantie l'effet de glace à une position centrée
+        if (iceEffectPrefab != null && iceEffectInstance == null)
+        {
+            iceEffectInstance = Instantiate(iceEffectPrefab, transform.position, Quaternion.identity, transform);
+            iceEffectInstance.transform.localPosition = new Vector3(0, 1.3f, 0); // ← position ajustée ici
+        }
+
+        StartCoroutine(UnrootAfterDelay(3f));
+    }
+
+    private IEnumerator UnrootAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        isRooted = false;
+        Debug.Log("✅ Ennemi libéré !");
+        
+        // Restaure le contrôle de l'animator
+        if (anim != null)
+            anim.speed = 1f;
+
+        if (iceEffectInstance != null)
+            Destroy(iceEffectInstance);
     }
 
     public void TakeDamage(int amount)
@@ -176,7 +208,7 @@ public class Ennemi : MonoBehaviour
     {
         if (sr != null)
         {
-            sr.color = Color.cyan; // Change en bleu clair quand touché
+            sr.color = Color.cyan;
             yield return new WaitForSeconds(0.1f);
             sr.color = originalColor;
         }
@@ -191,13 +223,11 @@ public class Ennemi : MonoBehaviour
 
         if (anim != null)
             anim.SetTrigger("Death");
-        else
-            Debug.LogWarning("Aucune animation de mort assignée !");
 
         Collider2D col = GetComponent<Collider2D>();
         if (col != null)
             col.enabled = false;
 
-        Destroy(gameObject, 1f); // Laisse l'anim de mort se jouer
+        Destroy(gameObject, 1f);
     }
 }

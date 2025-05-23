@@ -76,8 +76,23 @@ TagManager:
   - name: spikes
     uniqueID: 3615777625
     locked: 0
+  - name: Enemy
+    uniqueID: 3480643309
+    locked: 0
+  - name: ice
+    uniqueID: 3868302085
+    locked: 0
+  - name: porte back
+    uniqueID: 3523968291
+    locked: 0
   - name: Player
     uniqueID: 1626618963
+    locked: 0
+  - name: cachecache
+    uniqueID: 1447791463
+    locked: 0
+  - name: porte front
+    uniqueID: 14239125
     locked: 0
   m_RenderingLayers:
   - Default

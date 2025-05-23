@@ -7,13 +7,6 @@ public class PlayerAttack : MonoBehaviour
     public float cooldownTime = 10f;
     private float lastAttackTime = 0f;
 
-    private SpriteRenderer spriteRenderer;
-
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= lastAttackTime + cooldownTime)
@@ -30,8 +23,11 @@ public class PlayerAttack : MonoBehaviour
         RootAttack rootAttack = root.GetComponent<RootAttack>();
         if (rootAttack != null)
         {
-            Vector2 dir = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+            // 👉 utilise la direction du scale (comme dans ton script de mouvement)
+            float scaleX = transform.localScale.x;
+            Vector2 dir = scaleX > 0 ? Vector2.right : Vector2.left;
             rootAttack.direction = dir;
+
             Debug.Log("🎯 Direction envoyée au projectile : " + dir);
         }
     }

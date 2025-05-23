@@ -10,6 +10,9 @@ public class SlashPlayerAttack : MonoBehaviour
     public float attackRate = 2f;
     public float hitStopDuration = 0.05f;
 
+    public AudioClip slashSound;
+    private AudioSource audioSource;
+
     private float nextAttackTime = 0f;
     private Animator animator;
     private PlayerMovement movement;
@@ -18,6 +21,7 @@ public class SlashPlayerAttack : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -34,15 +38,20 @@ public class SlashPlayerAttack : MonoBehaviour
 
     void Attack()
     {
+        if (slashSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(slashSound);
+        }
+
         Debug.Log("Attaque lancée !");
         animator?.SetTrigger("Attack");
-        if (movement.IsGrounded()) // ✅ On bloque le mouvement seulement au sol
+        if (movement.IsGrounded())
         {
             movement.isAttacking = true;
         }
     }
 
-    public void DealDamage() // Appelée par l'événement dans l'animation
+    public void DealDamage()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         Debug.Log("Ennemis détectés : " + hitEnemies.Length);
@@ -59,7 +68,7 @@ public class SlashPlayerAttack : MonoBehaviour
         }
     }
 
-    public void EndAttack() // Appelée à la fin de l'animation
+    public void EndAttack()
     {
         movement.isAttacking = false;
     }

@@ -28,7 +28,7 @@ public class CameraRoom : MonoBehaviour
         Gizmos.color = enableFollowMode ? Color.green : Color.red;
 
         // Taille du cadre = taille caméra 16:9 (ajuste si nécessaire)
-        Vector3 gizmoSize = new Vector3(24.2f, 13.6f, 0f);
+        Vector3 gizmoSize = new Vector3(16f, 9f, 0f);
         Gizmos.DrawWireCube(cameraTargetPosition, gizmoSize);
     }
 #endif
