@@ -9,7 +9,8 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Time.time >= lastAttackTime + cooldownTime)
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton6))
+            && Time.time >= lastAttackTime + cooldownTime)
         {
             LaunchRoot();
             lastAttackTime = Time.time;

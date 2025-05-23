@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private int extraJumpsValue = 1;
 
     private bool canJump = true;
-    private float jumpCooldown = 0.3f;
+    private float jumpCooldown = 0.1f;
     private bool wasGroundedLastFrame = false;
 
     [SerializeField] private Rigidbody2D rb;
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip dashSound;
     [SerializeField] private AudioClip landSound;
-    [SerializeField] private AudioClip[] walkClips;  // <-- Tableau des sons de pas
+    [SerializeField] private AudioClip[] walkClips;
 
     private AudioSource sfxSource;
 
@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         if (isAttacking && IsGrounded())
         {
             horizontal = 0f;
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             Flip();
             return;
         }
@@ -86,51 +87,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton5)) && canDash)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton7)) && canDash)
         {
             StartCoroutine(Dash());
         }
 
         HandleWalkSteps();
         Flip();
-    }
-
-    private void HandleWalkSteps()
-    {
-        if (IsGrounded() && Mathf.Abs(horizontal) > 0.1f)
-        {
-            stepTimer -= Time.deltaTime;
-            if (stepTimer <= 0f)
-            {
-                PlayStepSound();
-                stepTimer = stepInterval;
-            }
-        }
-        else
-        {
-            stepTimer = 0f;
-            walkClipIndex = 0; // reset à chaque arrêt pour recommencer au début
-        }
-    }
-
-    private void PlayStepSound()
-    {
-        if (walkClips.Length == 0) return;
-
-        sfxSource.PlayOneShot(walkClips[walkClipIndex]);
-
-        walkClipIndex++;
-        if (walkClipIndex >= walkClips.Length)
-            walkClipIndex = 0;
-    }
-
-    private IEnumerator PerformJump()
-    {
-        canJump = false;
-        PlaySound(jumpSound);
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
-        yield return new WaitForSeconds(jumpCooldown);
-        canJump = true;
     }
 
     private void FixedUpdate()
@@ -147,20 +110,13 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
-    public bool IsGrounded()
+    private IEnumerator PerformJump()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-    }
-
-    private void Flip()
-    {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
-            Vector3 localScale = transform.localScale;
-            isFacingRight = !isFacingRight;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
+        canJump = false;
+        PlaySound(jumpSound);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+        yield return new WaitForSeconds(jumpCooldown);
+        canJump = true;
     }
 
     private IEnumerator Dash()
@@ -185,6 +141,51 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private void HandleWalkSteps()
+    {
+        if (IsGrounded() && Mathf.Abs(horizontal) > 0.1f)
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0f)
+            {
+                PlayStepSound();
+                stepTimer = stepInterval;
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+            walkClipIndex = 0;
+        }
+    }
+
+    private void PlayStepSound()
+    {
+        if (walkClips.Length == 0) return;
+
+        sfxSource.PlayOneShot(walkClips[walkClipIndex]);
+
+        walkClipIndex++;
+        if (walkClipIndex >= walkClips.Length)
+            walkClipIndex = 0;
+    }
+
+    public bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    private void Flip()
+    {
+        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        {
+            Vector3 localScale = transform.localScale;
+            isFacingRight = !isFacingRight;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
     }
 
     private void PlaySound(AudioClip clip)

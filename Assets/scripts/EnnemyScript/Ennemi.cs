@@ -30,7 +30,7 @@ public class Ennemi : MonoBehaviour
 
     private Animator anim;
 
-    public GameObject iceEffectPrefab;  // <-- Assign this in the Inspector
+    public GameObject iceEffectPrefab;
     private GameObject iceEffectInstance;
 
     void Awake()
@@ -52,7 +52,7 @@ public class Ennemi : MonoBehaviour
 
         if (player != null)
         {
-            float distanceToPlayer = Mathf.Abs(transform.position.x - player.position.x);
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
             if (distanceToPlayer <= detectionRadius)
             {
@@ -137,8 +137,9 @@ public class Ennemi : MonoBehaviour
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
-            float distance = Mathf.Abs(transform.position.x - player.position.x);
-            if (distance <= attackRange + 0.5f)
+            float distance = Vector2.Distance(transform.position, player.position);
+            float verticalDistance = Mathf.Abs(transform.position.y - player.position.y);
+            if (distance <= attackRange && verticalDistance < 1f)
             {
                 playerHealth.TakeDamage(attackDamage);
 
@@ -160,15 +161,13 @@ public class Ennemi : MonoBehaviour
         Debug.Log("❄️ Ennemi enraciné !");
         SetWalking(false);
 
-        // Freeze animation sur la frame actuelle
         if (anim != null)
             anim.speed = 0f;
 
-        // Instantie l'effet de glace à une position centrée
         if (iceEffectPrefab != null && iceEffectInstance == null)
         {
             iceEffectInstance = Instantiate(iceEffectPrefab, transform.position, Quaternion.identity, transform);
-            iceEffectInstance.transform.localPosition = new Vector3(0, 1.3f, 0); // ← position ajustée ici
+            iceEffectInstance.transform.localPosition = new Vector3(0, 1.3f, 0);
         }
 
         StartCoroutine(UnrootAfterDelay(3f));
@@ -180,8 +179,7 @@ public class Ennemi : MonoBehaviour
 
         isRooted = false;
         Debug.Log("✅ Ennemi libéré !");
-        
-        // Restaure le contrôle de l'animator
+
         if (anim != null)
             anim.speed = 1f;
 
